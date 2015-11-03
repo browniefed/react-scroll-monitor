@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
-import { add } from 'library-boilerplate';
+import React from 'react';
+var ScrollHack = require('./ScrollHack');
 
-export default class App extends Component {
+class App extends React.Component {
   render() {
     return (
-      <p>
-        2 + 2 = {add(2, 2)}
-      </p>
+      <div>
+        <ScrollHack names={["1","2","3","4"]} />
+      </div>
     );
   }
 }
+
+module.exports = App

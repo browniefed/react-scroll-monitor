@@ -28,6 +28,16 @@ module.exports = {
       exclude: /node_modules/
     }]
   },
+  externals: [
+    {
+      react: {
+        root: 'React',
+        commonjs2: 'react',
+        commonjs: 'react',
+        amd: 'react'
+      }
+    }
+  ],
   output: {
     library: 'library-boilerplate',
     libraryTarget: 'umd'
