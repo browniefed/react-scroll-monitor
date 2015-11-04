@@ -8,7 +8,7 @@ export default function Listen(collect) {
       constructor(props, context) {
         super(props, context);
         this._removeListener = Handler.registerScrollListener(this.context.scrollId, (scrollTop, bounding) => ({
-          collect: collect(scrollTop, bounding, this.props, this),
+          collect: collect(scrollTop, bounding, this.props, this.component),
           update: (props) => this.setState(props)
         }))
       }
@@ -24,6 +24,7 @@ export default function Listen(collect) {
       render() {
         return (
           <DecoratedComponent 
+            ref={(component) => this.component = component}
             {...this.props}
             {...this.state}
           />

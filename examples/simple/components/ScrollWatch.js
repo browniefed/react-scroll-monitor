@@ -21,6 +21,7 @@ var collect = function(scrollTop, bounding, props, component) {
   } = domComponent.getBoundingClientRect()
 
   var position = (top + height) - bounding.top;
+
   return {
     inRange: position > 0,
     scrollTop: scrollTop,
