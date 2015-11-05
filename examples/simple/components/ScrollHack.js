@@ -16,6 +16,7 @@ class ScrollHack extends React.Component {
 function collect(props, childProps) {
 
   var selected = find(childProps, ({inRange}) => inRange === true )
+  
   return {
     something: 'ABC',
     selected: selected.name

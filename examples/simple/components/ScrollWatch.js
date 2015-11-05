@@ -22,10 +22,16 @@ var collect = function(scrollTop, bounding, props, component) {
 
   var position = (top + height) - bounding.top;
 
-  return {
+  return {  
     inRange: position > 0,
     scrollTop: scrollTop,
     name: props.name
   }
 }
-module.exports = ScrollListener(collect)(ScrollWatch)
+
+function execute(oldProps, newProps) {
+  if (oldProps.selected === newProps.selected) return;
+  return newProps;
+}
+
+module.exports = ScrollListener(collect, execute)(ScrollWatch)
