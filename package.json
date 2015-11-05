@@ -1,6 +1,6 @@
 {
   "name": "react-scroll-monitor",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "react scroll monitor",
   "main": "lib/index.js",
   "scripts": {

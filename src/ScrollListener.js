@@ -14,8 +14,8 @@ export default function Listen(collect, execute = defaultExecute) {
       constructor(props, context) {
         super(props, context);
         this.state = {};
-        this._removeListener = Handler.registerScrollListener(this.context.scrollId, (scrollTop, bounding) => ({
-          collect: collect(scrollTop, bounding, this.props, this.component),
+        this._removeListener = Handler.registerScrollListener(this.context.scrollId, (scrollTop, scrollHeight, bounding) => ({
+          collect: collect(scrollTop, scrollHeight, bounding, this.props, this.component),
           update: (props) => {
             var newProps = execute(this.state, props, this.component);
             if (isUndefined(newProps) || shallowEqual(this.state, newProps)) return;

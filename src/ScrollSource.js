@@ -29,11 +29,12 @@ export default function Source(collect) {
       }
 
       handleScroll(e) {
-        var domComponent = React.findDOMNode(this)
+        var domComponent = React.findDOMNode(this);
         var scrollTop = domComponent.scrollTop;
+        var scrollHeight = domComponent.scrollHeight;
         var bounding = domComponent.getBoundingClientRect();
 
-        var childrenCollect = Handler.getScrollListeners(this._scrollId).map((cb) => cb(scrollTop, bounding, e))
+        var childrenCollect = Handler.getScrollListeners(this._scrollId).map((cb) => cb(scrollTop, scrollHeight, bounding, e))
         var newCollect = collect(this.props, pluck(childrenCollect, 'collect'));
 
         childrenCollect.forEach((col) => {
