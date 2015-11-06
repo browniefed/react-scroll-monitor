@@ -2,15 +2,11 @@ var listeners = {};
 var updateListeners = {};
 
 var Handler = {
-  registerUpdateListner: (id, cb) => {
-    
-    updateListeners[id] = updateListeners[id] || [];
-    updateListeners[id].push(cb);
-
+  registerUpdateListener: (id, cb) => {
+    updateListeners[id] = cb;
     return {
       remove: () => {
-        var index = updateListeners[id].findIndex((f) => f === cb);
-        updateListeners[id].splice(index, 1);
+        delete updateListeners[id]
       }
     }
   },
@@ -26,7 +22,8 @@ var Handler = {
       }
     }
   },
-  getUpdateListeners: (id) => updateListeners[id] || [],
+  triggerUpdate: (id) => {updateListeners[id] && updateListeners[id]()},
+  getUpdateListener: (id) => updateListeners[id] || null,
   getScrollListeners: (id) => listeners[id] || []
 }
 

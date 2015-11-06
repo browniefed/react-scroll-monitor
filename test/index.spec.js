@@ -27,21 +27,30 @@ describe('Handler', () => {
   
   describe('update listener', function() {
     it ('should register update listener with an id', function() {
-      Handler.registerUpdateListner(id, function() {});
-      expect(Handler.getUpdateListeners(id).length).toBe(1);
+      Handler.registerUpdateListener(id, function() {});
+      expect(Handler.getUpdateListener(id)).toBeA('function');
     });
 
     it ('should return an object with a remove function', function() {
-      var removeListener = Handler.registerUpdateListner(id, function() {});
+      var removeListener = Handler.registerUpdateListener(id, function() {});
       expect(removeListener.remove).toBeA('function')
     });
 
     it('should remove the listener when remove is called', function() {
-      var removeListener = Handler.registerUpdateListner(id, function() {});
-      expect(Handler.getUpdateListeners(id).length).toBe(1);
+      var removeListener = Handler.registerUpdateListener(id, function() {});
+      expect(Handler.getUpdateListener(id)).toBeA('function');
       removeListener.remove();
-      expect(Handler.getUpdateListeners(id).length).toBe(0);
+      expect(Handler.getUpdateListener(id)).toBe(null);
     });
+
+    it('should trigger update when called', function() {
+      var spy = expect.createSpy();
+      Handler.registerUpdateListener(id, spy);
+
+      Handler.triggerUpdate(id);
+      expect(spy.calls.length).toEqual(1)
+
+    })
   });
 
   describe('scroll listener', function() {

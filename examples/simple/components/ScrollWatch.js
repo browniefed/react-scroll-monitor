@@ -2,6 +2,10 @@ import React from 'react';
 import {ScrollListener} from 'library-boilerplate';
 
 class ScrollWatch extends React.Component {
+  componentDidMount() {
+    setTimeout(() => this.props.triggerUpdate(), 3000);
+  }
+
   render() {
     return (
       <div {...this.props}>
@@ -11,7 +15,7 @@ class ScrollWatch extends React.Component {
   }
 }
 
-var collect = function(scrollTop, bounding, props, component) {
+var collect = function(scrollTop, scrollHeight, bounding, props, component) {
   var domComponent = React.findDOMNode(component);
   var offset = (bounding.top * -1) + scrollTop
 

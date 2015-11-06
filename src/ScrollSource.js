@@ -17,24 +17,26 @@ export default function Source(collect) {
       constructor(props, context) {
         super(props, context);
         this._scrollId = getUniqueId();
+
         this.handleScroll = this.handleScroll.bind(this);
+        this._removeUpdateListener = Handler.registerUpdateListener(this._scrollId, this.handleScroll);
       }
 
       componentWillUnmount() {
-        this._removeListener.remove();
+        this._removeUpdateListener.remove();
       }
       
       getChildContext() {
         return {scrollId: this._scrollId};
       }
 
-      handleScroll(e) {
+      handleScroll() {
         var domComponent = React.findDOMNode(this);
         var scrollTop = domComponent.scrollTop;
         var scrollHeight = domComponent.scrollHeight;
         var bounding = domComponent.getBoundingClientRect();
 
-        var childrenCollect = Handler.getScrollListeners(this._scrollId).map((cb) => cb(scrollTop, scrollHeight, bounding, e))
+        var childrenCollect = Handler.getScrollListeners(this._scrollId).map((cb) => cb(scrollTop, scrollHeight, bounding))
         var newCollect = collect(this.props, pluck(childrenCollect, 'collect'));
 
         childrenCollect.forEach((col) => {

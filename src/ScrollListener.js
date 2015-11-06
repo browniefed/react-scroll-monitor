@@ -36,6 +36,7 @@ export default function Listen(collect, execute = defaultExecute) {
         return (
           <DecoratedComponent 
             ref={(component) => this.component = component}
+            triggerUpdate= {() => Handler.triggerUpdate(this.context.scrollId)}
             {...this.props}
             {...this.state}
           />
