@@ -1,5 +1,10 @@
+var findIndex = require('lodash/array/findIndex');
+var isArray = require('lodash/lang/isArray');
+var pullAt = require('lodash/array/pullAt');
+
 var listeners = {};
 var updateListeners = {};
+
 
 var Handler = {
   registerUpdateListener: (id, cb) => {
@@ -17,8 +22,9 @@ var Handler = {
 
     return {
       remove: () => {
-        var index = listeners[id].findIndex((f) => f === cb);
-        listeners[id].splice(index, 1);
+
+        if (!isArray(listeners[id])) return;
+        pullAt(listeners[id], findIndex(listeners[id], (f) => f === cb));
       }
     }
   },
