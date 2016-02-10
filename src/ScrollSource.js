@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import createChainedFunction from './utils/createChainedFunction';
 import getUniqueId from "./utils/getUniqueId";
 import Handler from "./handler";
@@ -31,7 +32,7 @@ export default function Source(collect) {
       }
 
       handleScroll() {
-        var domComponent = React.findDOMNode(this);
+        var domComponent = ReactDOM.findDOMNode(this);
         var scrollTop = domComponent.scrollTop;
         var scrollHeight = domComponent.scrollHeight;
         var bounding = domComponent.getBoundingClientRect();
