@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {ScrollListener} from 'library-boilerplate';
 
 class ScrollWatch extends React.Component {
@@ -16,7 +17,7 @@ class ScrollWatch extends React.Component {
 }
 
 var collect = function(scrollTop, scrollHeight, bounding, props, component) {
-  var domComponent = React.findDOMNode(component);
+  var domComponent = ReactDOM.findDOMNode(component);
   var offset = (bounding.top * -1) + scrollTop
 
   var {
